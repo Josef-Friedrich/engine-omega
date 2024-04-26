@@ -1097,6 +1097,20 @@ public abstract class Actor implements KeyListenerContainer, MouseClickListenerC
     }
 
     /**
+     * Verschiebt das Objekt.<br> Hierbei wird nichts anderes gemacht, als <code>move(new
+     * Vector(dx, dy))</code> auszuführen. Insofern ist diese Methode dafür gut, sich nicht mit
+     * der Klasse Vector auseinandersetzen zu müssen.
+     *
+     * @param dX Die Verschiebung in Richtung X
+     * @param dY Die Verschiebung in Richtung Y
+     * @see #moveBy(Vector)
+     */
+    @API
+    public final void moveBy(float dX, float dY) {
+        this.moveBy(new Vector(dX, dY));
+    }
+
+    /**
      * Verschiebt das Objekt ohne Bedingungen auf der Zeichenebene.
      *
      * @param v Der Vector, der die Verschiebung des Objekts angibt.
@@ -1219,20 +1233,6 @@ public abstract class Actor implements KeyListenerContainer, MouseClickListenerC
     @API
     public final Vector getCenterRelative() {
         return getCenter().subtract(getPosition());
-    }
-
-    /**
-     * Verschiebt das Objekt.<br> Hierbei wird nichts anderes gemacht, als <code>move(new
-     * Vector(dx, dy))</code> auszuführen. Insofern ist diese Methode dafür gut, sich nicht mit
-     * der Klasse Vector auseinandersetzen zu müssen.
-     *
-     * @param dX Die Verschiebung in Richtung X
-     * @param dY Die Verschiebung in Richtung Y
-     * @see #moveBy(Vector)
-     */
-    @API
-    public final void moveBy(float dX, float dY) {
-        this.moveBy(new Vector(dX, dY));
     }
 
     /**
