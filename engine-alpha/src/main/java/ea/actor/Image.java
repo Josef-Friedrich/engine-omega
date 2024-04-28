@@ -81,6 +81,23 @@ public class Image extends Actor {
     }
 
     /**
+     * Konstruktor für ein Bildobjekt.
+     *
+     * @param image         Ein bereits im Speicher vorhandenes Bild vom Datentyp BufferedImage.
+     * @param pixelPerMeter Der Umrechnungsfaktor für die Größe des Bildes. Gibt an, wie viele Pixel in der Bilddatei
+     *                      einem Meter in der Engine entsprechen.
+     */
+    @API
+    public Image(BufferedImage image, final float pixelPerMeter) {
+        super(() -> FixtureBuilder.createSimpleRectangularFixture(image.getWidth() / pixelPerMeter, image.getHeight() / pixelPerMeter));
+        assertViablePPM(pixelPerMeter);
+        this.image = image;
+
+        this.width = image.getWidth() / pixelPerMeter;
+        this.height = image.getHeight() / pixelPerMeter;
+    }
+
+    /**
      * @return Größe des Bildes in Pixeln
      */
     @Internal
