@@ -1249,6 +1249,10 @@ public abstract class Actor implements KeyListenerContainer, MouseClickListenerC
      * Rotiert das Objekt.
      *
      * @param degree Der Winkel (in <b>Grad</b>), um den das Objekt rotiert werden soll.
+     *               <ul>
+     *               <li>Werte &gt; 0 : Drehung gegen Uhrzeigersinn</li>
+     *               <li>Werte &lt; 0 : Drehung im Uhrzeigersinn</li>
+     *               </ul>
      */
     @API
     public final void rotateBy(float degree) {
