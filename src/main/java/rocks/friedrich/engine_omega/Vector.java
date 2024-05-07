@@ -71,12 +71,12 @@ public final class Vector implements Cloneable {
     /**
      * Der kontinuierliche DeltaX-Wert des Punktes. Die anderen Koordinaten sind ggf. nur gerundet.
      */
-    private final float x;
+    private final double x;
 
     /**
      * Der kontinuierliche DeltaY-Wert des Punktes. Die anderen Koordinaten sind ggf. nur gerundet.
      */
-    private final float y;
+    private final double y;
 
     /**
      * Konstruktor.
@@ -85,15 +85,12 @@ public final class Vector implements Cloneable {
      * @param y Bewegungsanteil <code>y</code>.
      */
     @API
-    public Vector(float x, float y) {
+    public Vector(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    @API
-    public Vector(double x, double y) {
-        this((float) x, (float) y);
-    }
+
 
     /**
      * Konstruktor. <br><br> Vector wird erzeugt als die nötige Bewegung von einem Point zu einem zweiten.
@@ -107,18 +104,18 @@ public final class Vector implements Cloneable {
         this.y = end.y - start.y;
     }
 
-    public static Vector ofAngle(float angleInDegree) {
+    public static Vector ofAngle(double angleInDegree) {
         double rad = Math.toRadians(angleInDegree);
         return new Vector(Math.cos(rad), Math.sin(rad));
     }
 
     @API
-    public float getX() {
+    public double getX() {
         return x;
     }
 
     @API
-    public float getY() {
+    public double getY() {
         return y;
     }
 
@@ -140,10 +137,10 @@ public final class Vector implements Cloneable {
      * @return Vector-Objekt, das eine Bewegung in dieselbe Richtung beschreibt, allerdings in der Länge gekürzt um den
      * angegebenen Divisor.
      * @throws java.lang.ArithmeticException Falls <code>divisor</code> <code>0</code> ist.
-     * @see #multiply(float)
+     * @see #multiply(double)
      */
     @API
-    public Vector divide(float divisor) {
+    public Vector divide(double divisor) {
         if (divisor == 0) {
             throw new ArithmeticException("Der Divisor für das Teilen war 0");
         }
@@ -157,8 +154,8 @@ public final class Vector implements Cloneable {
      * @return Länge des Vektors.
      */
     @API
-    public float getLength() {
-        return (float) Math.sqrt(x * x + y * y);
+    public double getLength() {
+        return (double) Math.sqrt(x * x + y * y);
     }
 
     /**
@@ -199,7 +196,7 @@ public final class Vector implements Cloneable {
      * @return Neues Vector-Objekt, das die Summe der beiden ursprünglichen Bewegungen darstellt.
      */
     @API
-    public Vector add(float x, float y) {
+    public Vector add(double x, double y) {
         return new Vector(this.x + x, this.y + y);
     }
 
@@ -222,7 +219,7 @@ public final class Vector implements Cloneable {
      * @return Die Differenz der beiden Vektoren (<code>"this - v"</code>)
      */
     @API
-    public Vector subtract(float x, float y) {
+    public Vector subtract(double x, double y) {
         return new Vector(this.x - x, this.y - y);
     }
 
@@ -244,7 +241,7 @@ public final class Vector implements Cloneable {
      * @return Neues Vector-Objekt, das entsprechend der Gradzahl rotiert wurde.
      */
     @API
-    public Vector rotate(float degree) {
+    public Vector rotate(double degree) {
         double angle = Math.toRadians(degree);
 
         return new Vector( //
@@ -273,10 +270,10 @@ public final class Vector implements Cloneable {
      * @param factor Der Faktor, mit dem die <code>getX</code>- und <code>getY</code>-Werte des Vektors multipliziert
      *               werden
      * @return Der Vector mit den multiplizierten Werten
-     * @see #divide(float)
+     * @see #divide(double)
      */
     @API
-    public Vector multiply(float factor) {
+    public Vector multiply(double factor) {
         return new Vector(x * factor, y * factor);
     }
 
@@ -286,10 +283,10 @@ public final class Vector implements Cloneable {
      *
      * @param factor Der Faktor, mit dem der x-Wert des Vektors multipliziert wird
      * @return Der Vector mit den multiplizierten Werten
-     * @see #multiply(float)
+     * @see #multiply(double)
      */
     @API
-    public Vector multiplyX(float factor) {
+    public Vector multiplyX(double factor) {
         return new Vector(x * factor, y);
     }
 
@@ -299,10 +296,10 @@ public final class Vector implements Cloneable {
      *
      * @param factor Der Faktor, mit dem der x-Wert des Vektors multipliziert wird
      * @return Der Vector mit den multiplizierten Werten
-     * @see #multiply(float)
+     * @see #multiply(double)
      */
     @API
-    public Vector multiplyY(float factor) {
+    public Vector multiplyY(double factor) {
         return new Vector(x, y * factor);
     }
 
@@ -314,7 +311,7 @@ public final class Vector implements Cloneable {
      * @return Skalarprodukt dieser Vektoren mit dem Vector <code>v</code>.
      */
     @API
-    public float getScalarProduct(Vector v) {
+    public double getScalarProduct(Vector v) {
         return this.x * v.x + this.y * v.y;
     }
 
@@ -411,8 +408,8 @@ public final class Vector implements Cloneable {
      * @return Die Summe von delta X und delta Y des Vektors.
      */
     @API
-    public float getManhattanLength() {
-        float length = x + y;
+    public double getManhattanLength() {
+        double length = x + y;
         return length < 0 ? -length : length;
     }
 
@@ -430,21 +427,21 @@ public final class Vector implements Cloneable {
      * @return Der Winkel zwischen diesem Vector und dem zweiten. Ist zwischen 0 und 180.
      */
     @API
-    public float getAngle(Vector other) {
+    public double getAngle(Vector other) {
         if (this.y < other.y) {
-            return (float) Math.toDegrees(Math.acos(this.getScalarProduct(other) / (this.getLength() * other.getLength())));
+            return (double) Math.toDegrees(Math.acos(this.getScalarProduct(other) / (this.getLength() * other.getLength())));
         } else {
-            return (float) (360 - Math.toDegrees(Math.acos(this.getScalarProduct(other) / (this.getLength() * other.getLength()))));
+            return (double) (360 - Math.toDegrees(Math.acos(this.getScalarProduct(other) / (this.getLength() * other.getLength()))));
         }
     }
 
     @Internal
     public Vec2 toVec2() {
-        return new Vec2(x, y);
+        return new Vec2((float) x, (float) y);
     }
 
     @API
     public boolean isNaN() {
-        return Float.isNaN(x) || Float.isNaN(y);
+        return Double.isNaN(x) || Double.isNaN(y);
     }
 }

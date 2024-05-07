@@ -71,19 +71,19 @@ public final class Random {
     }
 
     /**
-     * Gibt einen <b>zufälligen</b> <code>float</code>-Wert im Intervall <code>[0;1)</code> zurück. Die
+     * Gibt einen <b>zufälligen</b> <code>double</code>-Wert im Intervall <code>[0;1)</code> zurück. Die
      * Wahrscheinlichkeit ist für alle möglichen Werte in diesem Intervall gleich groß.
      *
-     * @return Ein <code>float</code>Wert im Intervall <code>[0;1]</code>. Die Wahrscheinlichkeit für alle möglichen
+     * @return Ein <code>double</code>Wert im Intervall <code>[0;1]</code>. Die Wahrscheinlichkeit für alle möglichen
      * Rückgaben ist <i>gleich groß</i>.
      */
     @API
-    public static float range() {
-        return ThreadLocalRandom.current().nextFloat();
+    public static double range() {
+        return ThreadLocalRandom.current().nextDouble();
     }
 
     /**
-     * Gibt einen <b>zufälligen</b> <code>float</code>-Wert zwischen einer festgelegten Unter- und Obergrenze
+     * Gibt einen <b>zufälligen</b> <code>double</code>-Wert zwischen einer festgelegten Unter- und Obergrenze
      * zurück.<br> Die Wahrscheinlichkeiten für die Werte zwischen Unter- und Obergrenze sind gleich groß.
      *
      * @param lowerLimit Die niedrigste Zahl, die im Ergebnis vorkommen kann.
@@ -93,13 +93,13 @@ public final class Random {
      * alle möglichen Rückgaben ist <i>gleich groß</i>.
      */
     @API
-    public static float range(float lowerLimit, float upperLimit) {
+    public static double range(double lowerLimit, double upperLimit) {
         if (lowerLimit == upperLimit) {
             return lowerLimit;
         } else if (lowerLimit < upperLimit) {
-            return lowerLimit + ThreadLocalRandom.current().nextFloat() * (upperLimit - lowerLimit);
+            return lowerLimit + ThreadLocalRandom.current().nextDouble() * (upperLimit - lowerLimit);
         } else {
-            return upperLimit + ThreadLocalRandom.current().nextFloat() * (lowerLimit - upperLimit);
+            return upperLimit + ThreadLocalRandom.current().nextDouble() * (lowerLimit - upperLimit);
         }
     }
 }

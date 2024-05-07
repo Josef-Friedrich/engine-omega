@@ -23,12 +23,12 @@ public class TileContainer extends Actor implements TileMap {
     /**
      * Die Breite eines Tiles (original) in px.
      */
-    private final float tileWidth;
+    private final double tileWidth;
 
     /**
      * Die Höhe eines Tiles (original) in px.
      */
-    private final float tileHeight;
+    private final double tileHeight;
 
     /**
      * Erstellt einen <b>leeren</b> Tile-Container. Er ist erst "sichtbar", wenn Tiles gesetzt werden.
@@ -41,7 +41,7 @@ public class TileContainer extends Actor implements TileMap {
      * @see #setTile(int, int, Tile)
      */
     @API
-    public TileContainer(int numX, int numY, float tileWidth, float tileHeight) {
+    public TileContainer(int numX, int numY, double tileWidth, double tileHeight) {
         super(() -> FixtureBuilder.createSimpleRectangularFixture(tileWidth * numX, tileHeight * numY));
 
         if (numX <= 0 || numY <= 0) {
@@ -75,7 +75,7 @@ public class TileContainer extends Actor implements TileMap {
      * @see #setTile(int, int, Tile)
      */
     @API
-    public TileContainer(int numX, int numY, float tileSize) {
+    public TileContainer(int numX, int numY, double tileSize) {
         this(numX, numY, tileSize, tileSize);
     }
 
@@ -93,9 +93,9 @@ public class TileContainer extends Actor implements TileMap {
 
     @Internal
     @Override
-    public void render(Graphics2D g, float pixelPerMeter) {
+    public void render(Graphics2D g, double pixelPerMeter) {
         final AffineTransform ore = g.getTransform();
-        float offset = tiles[0].length * tileHeight * pixelPerMeter;
+        double offset = tiles[0].length * tileHeight * pixelPerMeter;
 
         g.translate(0, -offset);
 
@@ -105,8 +105,8 @@ public class TileContainer extends Actor implements TileMap {
                     continue;
                 }
 
-                float tx = tileWidth * x * pixelPerMeter;
-                float ty = tileHeight * y * pixelPerMeter;
+                double tx = tileWidth * x * pixelPerMeter;
+                double ty = tileHeight * y * pixelPerMeter;
 
                 g.translate(tx, ty);
                 tiles[x][y].render(g, tileWidth * pixelPerMeter, tileHeight * pixelPerMeter);

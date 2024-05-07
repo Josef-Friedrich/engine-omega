@@ -15,37 +15,37 @@ import org.jbox2d.dynamics.FixtureDef;
  */
 public class FixtureData {
 
-    private float density = PhysicsData.DEFAULT_DENSITY;
+    private double density = PhysicsData.DEFAULT_DENSITY;
     private boolean isDensitySet = false;
-    private float friction = PhysicsData.DEFAULT_FRICTION;
+    private double friction = PhysicsData.DEFAULT_FRICTION;
     private boolean isFrictionSet = false;
-    private float restitution = PhysicsData.DEFAULT_RESTITUTION;
+    private double restitution = PhysicsData.DEFAULT_RESTITUTION;
     private boolean isRestitutionSet = false;
     private Shape shape;
 
-    public float getDensity() {
+    public double getDensity() {
         return density;
     }
 
-    public void setDensity(float density) {
+    public void setDensity(double density) {
         isDensitySet = true;
         this.density = density;
     }
 
-    public float getFriction() {
+    public double getFriction() {
         return friction;
     }
 
-    public void setFriction(float friction) {
+    public void setFriction(double friction) {
         isFrictionSet = true;
         this.friction = friction;
     }
 
-    public float getRestitution() {
+    public double getRestitution() {
         return restitution;
     }
 
-    public void setRestitution(float restitution) {
+    public void setRestitution(double restitution) {
         isRestitutionSet = true;
         this.restitution = restitution;
     }
@@ -101,9 +101,9 @@ public class FixtureData {
     @Internal
     FixtureDef createFixtureDef(PhysicsData parent) {
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.density = isDensitySet ? density : parent.getGlobalDensity();
-        fixtureDef.friction = isFrictionSet ? friction : parent.getGlobalFriction();
-        fixtureDef.restitution = isRestitutionSet ? restitution : parent.getGlobalRestitution();
+        fixtureDef.density = (float) (isDensitySet ? density : parent.getGlobalDensity());
+        fixtureDef.friction = (float) (isFrictionSet ? friction : parent.getGlobalFriction());
+        fixtureDef.restitution = (float) (isRestitutionSet ? restitution : parent.getGlobalRestitution());
         fixtureDef.isSensor = isSensorSet ? isSensor : parent.getType().isSensor();
         fixtureDef.filter = filter;
         fixtureDef.shape = shape;

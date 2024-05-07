@@ -40,8 +40,8 @@ public class Image extends Actor {
      */
     private final BufferedImage image;
 
-    private float width;
-    private float height;
+    private double width;
+    private double height;
 
     private boolean flipVertical = false;
     private boolean flipHorizontal = false;
@@ -54,7 +54,7 @@ public class Image extends Actor {
      * @param height   Die Höhe in M für das Bildobjekt
      */
     @API
-    public Image(String filepath, float width, float height) {
+    public Image(String filepath, double width, double height) {
         super(() -> FixtureBuilder.createSimpleRectangularFixture(width, height));
         assertViableSizes(width, height);
         this.image = ImageLoader.load(filepath);
@@ -71,7 +71,7 @@ public class Image extends Actor {
      *                      einem Meter in der Engine entsprechen.
      */
     @API
-    public Image(String filepath, final float pixelPerMeter) {
+    public Image(String filepath, final double pixelPerMeter) {
         super(() -> FixtureBuilder.createSimpleRectangularFixture(ImageLoader.load(filepath).getWidth() / pixelPerMeter, ImageLoader.load(filepath).getHeight() / pixelPerMeter));
         assertViablePPM(pixelPerMeter);
         this.image = ImageLoader.load(filepath);
@@ -88,7 +88,7 @@ public class Image extends Actor {
      *                      einem Meter in der Engine entsprechen.
      */
     @API
-    public Image(BufferedImage image, final float pixelPerMeter) {
+    public Image(BufferedImage image, final double pixelPerMeter) {
         super(() -> FixtureBuilder.createSimpleRectangularFixture(image.getWidth() / pixelPerMeter, image.getHeight() / pixelPerMeter));
         assertViablePPM(pixelPerMeter);
         this.image = image;
@@ -120,9 +120,9 @@ public class Image extends Actor {
      * @param width  Die neue Breite des Objekts in M.
      * @param height Die neue Höhe des Objekts in M.
      *
-     * @see #resetPixelPerMeter(float)
+     * @see #resetPixelPerMeter(double)
      */
-    public void resetImageSize(float width, float height) {
+    public void resetImageSize(double width, double height) {
         assertViableSizes(width, height);
         this.width = width;
         this.height = height;
@@ -136,20 +136,20 @@ public class Image extends Actor {
      * @param pixelPerMeter Der Umrechnungsfaktor für die Größe des Bildes. Gibt an, wie viele Pixel in der Bilddatei
      *                      einem Meter in der Engine entsprechen.
      *
-     * @see #resetImageSize(float, float)
+     * @see #resetImageSize(double, double)
      */
-    public void resetPixelPerMeter(float pixelPerMeter) {
+    public void resetPixelPerMeter(double pixelPerMeter) {
         assertViablePPM(pixelPerMeter);
         resetImageSize(image.getWidth() / pixelPerMeter, image.getHeight() / pixelPerMeter);
     }
 
-    private void assertViableSizes(float width, float height) {
+    private void assertViableSizes(double width, double height) {
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Bildhöhe und Breite müssen größer als 0 sein.");
         }
     }
 
-    private void assertViablePPM(float pixelPerMeter) {
+    private void assertViablePPM(double pixelPerMeter) {
         if (pixelPerMeter <= 0) {
             throw new IllegalArgumentException("Die Umrechnungszahl für Pixel pro Meter darf nicht negativ sein. War " + pixelPerMeter);
         }
@@ -205,7 +205,7 @@ public class Image extends Actor {
      * {@inheritDoc}
      */
     @Override
-    public void render(Graphics2D g, float pixelPerMeter) {
+    public void render(Graphics2D g, double pixelPerMeter) {
         AffineTransform pre = g.getTransform();
         g.scale(width * pixelPerMeter / this.image.getWidth(), height * pixelPerMeter / this.image.getHeight());
         g.drawImage(this.image,

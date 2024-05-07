@@ -9,18 +9,18 @@ import rocks.friedrich.engine_omega.internal.annotations.Internal;
  *
  * @author Michael Andonie
  */
-public class CosinusFloat
-implements Interpolator<Float> {
+public class CosinusDouble
+implements Interpolator<Double> {
 
     /**
      * Der Startwert der Cosinuskurve.
      */
-    private final float start;
+    private final double start;
 
     /**
      * Die Amplitude der Cosinuskurve
      */
-    private final float amplitude;
+    private final double amplitude;
 
     /**
      * Erstellt einen neuen Cosinuskurven-Interpolator.
@@ -35,14 +35,14 @@ implements Interpolator<Float> {
      *                  </ul>
      */
     @API
-    public CosinusFloat(float start, float amplitude) {
+    public CosinusDouble(double start, double amplitude) {
         this.start = start;
         this.amplitude = amplitude;
     }
 
     @Internal
     @Override
-    public Float interpolate(float progress) {
-        return (float)Math.cos(Math.PI * progress * 2) * amplitude + start - amplitude;
+    public Double interpolate(double progress) {
+        return (double)Math.cos(Math.PI * progress * 2) * amplitude + start - amplitude;
     }
 }

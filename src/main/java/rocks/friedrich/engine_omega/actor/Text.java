@@ -42,7 +42,7 @@ public class Text extends Geometry {
     private static final int SIZE = 1000;
 
     @Internal
-    private static FixtureData createShape(String content, float height, Font font) {
+    private static FixtureData createShape(String content, double height, Font font) {
         Vector sizeInPixels = rocks.friedrich.engine_omega.internal.util.FontMetrics.getSize(content, font);
 
         return FixtureBuilder.createSimpleRectangularFixture(sizeInPixels.getX() * height / sizeInPixels.getY(), height);
@@ -51,7 +51,7 @@ public class Text extends Geometry {
     /**
      * Höhe des Textes.
      */
-    private float height;
+    private double height;
 
     /**
      * Die Schriftart (<b>fett, kursiv, oder fett & kursiv</b>).<br> Dies wird dargestellt als int.Wert:<br> 0:
@@ -70,7 +70,7 @@ public class Text extends Geometry {
     private Font font;
 
     private transient int cachedDescent;
-    private transient float cachedScaleFactor;
+    private transient double cachedScaleFactor;
 
     /**
      * Konstruktor für Objekte der Klasse Text<br> Möglich ist es auch, Fonts zu laden, die im Projektordner sind.
@@ -87,7 +87,7 @@ public class Text extends Geometry {
      *                 normalen Text.
      */
     @API
-    public Text(String content, float height, String fontName, int style) {
+    public Text(String content, double height, String fontName, int style) {
         super(() -> createShape(content == null ? "" : content, height, FontLoader.loadByName(fontName).deriveFont(style, SIZE)));
 
         this.content = content == null ? "" : content;
@@ -105,7 +105,7 @@ public class Text extends Geometry {
      * @param fontName Der Font, in dem der Text dargestellt werden soll.
      */
     @API
-    public Text(String content, float height, String fontName) {
+    public Text(String content, double height, String fontName) {
         this(content, height, fontName, 0);
     }
 
@@ -117,7 +117,7 @@ public class Text extends Geometry {
      * @param height  Die Höhe
      */
     @API
-    public Text(String content, float height) {
+    public Text(String content, double height) {
         this(content, height, Font.SANS_SERIF, 0);
     }
 
@@ -187,7 +187,7 @@ public class Text extends Geometry {
     }
 
     @API
-    public void setHeight(float height) {
+    public void setHeight(double height) {
         if (this.height != height) {
             this.height = height;
             this.update();
@@ -195,18 +195,18 @@ public class Text extends Geometry {
     }
 
     @API
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
     @API
-    public float getWidth() {
+    public double getWidth() {
         Vector sizeInPixels = rocks.friedrich.engine_omega.internal.util.FontMetrics.getSize(content, font);
         return sizeInPixels.getX() * height / sizeInPixels.getY();
     }
 
     @API
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         Vector sizeInPixels = rocks.friedrich.engine_omega.internal.util.FontMetrics.getSize(content, font);
         this.setHeight(width / sizeInPixels.getX() * sizeInPixels.getY());
     }
@@ -222,7 +222,7 @@ public class Text extends Geometry {
 
     @Override
     @Internal
-    public void render(Graphics2D g, float pixelPerMeter) {
+    public void render(Graphics2D g, double pixelPerMeter) {
         AffineTransform pre = g.getTransform();
         Font preFont = g.getFont();
 

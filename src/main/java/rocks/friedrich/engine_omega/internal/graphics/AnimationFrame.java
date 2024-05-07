@@ -21,7 +21,7 @@ public final class AnimationFrame {
     /**
      * Die Dauer in Sekunden, die dieser Frame aktiv bleibt.
      */
-    private float duration;
+    private double duration;
 
     /**
      * Erstellt einen Frame.
@@ -29,13 +29,13 @@ public final class AnimationFrame {
      * @param duration  Die Dauer, die dieser Frame aktiv bleibt.
      */
     @Internal
-    public AnimationFrame(BufferedImage image, float duration) {
+    public AnimationFrame(BufferedImage image, double duration) {
         this.image = image;
         this.duration = duration;
     }
 
     @Internal
-    public void setDuration(float duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 
@@ -45,7 +45,7 @@ public final class AnimationFrame {
     }
 
     @Internal
-    public float getDuration() {
+    public double getDuration() {
         return duration;
     }
 
@@ -54,7 +54,7 @@ public final class AnimationFrame {
      * @param g   Das Graphics Objekt
      */
     @Internal
-    public void render(Graphics2D g, float width, float height, boolean flipHorizontal, boolean flipVertical) {
+    public void render(Graphics2D g, double width, double height, boolean flipHorizontal, boolean flipVertical) {
         AffineTransform pre = g.getTransform();
         g.scale(width / this.image.getWidth(), height / this.image.getHeight());
         g.drawImage(image,

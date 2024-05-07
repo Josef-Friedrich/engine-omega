@@ -96,108 +96,108 @@ public class BodyHandler implements PhysicsHandler {
     }
 
     @Override
-    public float getRotation() {
-        return (float) Math.toDegrees(body.getAngle());
+    public double getRotation() {
+        return (double) Math.toDegrees(body.getAngle());
     }
 
     @Override
-    public void rotateBy(float degree) {
+    public void rotateBy(double degree) {
         synchronized (worldHandler) {
             worldHandler.assertNoWorldStep();
 
-            body.setTransform(body.getPosition(), body.getAngle() + (float) Math.toRadians(degree));
+            body.setTransform(body.getPosition(), (float) (body.getAngle() +  Math.toRadians(degree)));
         }
     }
 
     @Override
-    public void setRotation(float degree) {
+    public void setRotation(double degree) {
         synchronized (worldHandler) {
             worldHandler.assertNoWorldStep();
 
-            body.setTransform(body.getPosition(), (float) Math.toRadians((double) degree));
+            body.setTransform(body.getPosition(), (float) Math.toRadians(degree));
         }
     }
 
     @Override
-    public void setDensity(float density) {
+    public void setDensity(double density) {
         synchronized (worldHandler) {
             for (Fixture fixture = body.m_fixtureList; fixture != null; fixture = fixture.m_next) {
-                fixture.setDensity(density);
+                fixture.setDensity((float) density);
             }
             body.resetMassData();
         }
     }
 
     @Override
-    public float getDensity() {
+    public double getDensity() {
         return body.m_fixtureList.getDensity();
     }
 
     @Override
-    public void setGravityScale(float factor) {
-        body.setGravityScale(factor);
+    public void setGravityScale(double factor) {
+        body.setGravityScale((float) factor);
         body.setAwake(true);
     }
 
     @Override
-    public float getGravityScale() {
+    public double getGravityScale() {
         return body.getGravityScale();
     }
 
     @Override
-    public void setFriction(float friction) {
+    public void setFriction(double friction) {
         synchronized (worldHandler) {
             for (Fixture fixture = body.m_fixtureList; fixture != null; fixture = fixture.m_next) {
-                fixture.setFriction(friction);
+                fixture.setFriction((float) friction);
             }
         }
     }
 
     @Override
-    public float getFriction() {
+    public double getFriction() {
         return body.m_fixtureList.getFriction();
     }
 
     @Override
-    public void setRestitution(float elasticity) {
+    public void setRestitution(double elasticity) {
         synchronized (worldHandler) {
             for (Fixture fixture = body.m_fixtureList; fixture != null; fixture = fixture.m_next) {
-                fixture.setRestitution(elasticity);
+                fixture.setRestitution((float) elasticity);
             }
         }
     }
 
     @Override
-    public float getRestitution() {
+    public double getRestitution() {
         return body.m_fixtureList.getRestitution();
     }
 
     @Override
-    public void setLinearDamping(float damping) {
+    public void setLinearDamping(double damping) {
         synchronized (worldHandler) {
-            body.setLinearDamping(damping);
+            body.setLinearDamping((float) damping);
         }
     }
 
     @Override
-    public float getLinearDamping() {
+    public double getLinearDamping() {
         return body.getLinearDamping();
     }
 
     @Override
-    public void setAngularDamping(float damping) {
+    public void setAngularDamping(double damping) {
         synchronized (worldHandler) {
-            body.setAngularDamping(damping);
+            body.setAngularDamping((float) damping);
         }
     }
 
     @Override
-    public float getAngularDamping() {
+    public double getAngularDamping() {
         return body.getAngularDamping();
     }
 
     @Override
-    public float getMass() {
+    public double getMass() {
         return body.getMass();
     }
 
@@ -209,16 +209,16 @@ public class BodyHandler implements PhysicsHandler {
     }
 
     @Override
-    public void applyTorque(float torque) {
+    public void applyTorque(double torque) {
         synchronized (worldHandler) {
-            body.applyTorque(torque);
+            body.applyTorque((float) torque);
         }
     }
 
     @Override
-    public void applyRotationImpulse(float rotationImpulse) {
+    public void applyRotationImpulse(double rotationImpulse) {
         synchronized (worldHandler) {
-            body.applyAngularImpulse(rotationImpulse);
+            body.applyAngularImpulse((float) rotationImpulse);
         }
     }
 
@@ -308,15 +308,15 @@ public class BodyHandler implements PhysicsHandler {
     }
 
     @Override
-    public void setAngularVelocity(float rotationsPerSecond) {
+    public void setAngularVelocity(double rotationsPerSecond) {
         synchronized (worldHandler) {
             body.setAngularVelocity((float) Math.toRadians(rotationsPerSecond * 360));
         }
     }
 
     @Override
-    public float getAngularVelocity() {
-        return (float) Math.toDegrees(body.getAngularVelocity()) / 360;
+    public double getAngularVelocity() {
+        return (double) Math.toDegrees(body.getAngularVelocity()) / 360;
     }
 
     @Override
@@ -357,9 +357,9 @@ public class BodyHandler implements PhysicsHandler {
         // Test-AABB: Should be a rectangle right below the body
         //Minimal height, width of the body
         AABB testAABB = new AABB();
-        final float epsilon = 0.0001f;
+        final double epsilon = 0.0001f;
         testAABB.lowerBound.set(bodyBounds.lowerBound.x, bodyBounds.lowerBound.y);
-        testAABB.upperBound.set(bodyBounds.upperBound.x, bodyBounds.lowerBound.y + epsilon);
+        testAABB.upperBound.set((float) bodyBounds.upperBound.x, (float)(bodyBounds.lowerBound.y + epsilon));
 
         Fixture[] groundCandidates = worldHandler.queryAABB(testAABB);
         for (Fixture fixture : groundCandidates) {

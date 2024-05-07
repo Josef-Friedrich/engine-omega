@@ -16,148 +16,168 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package rocks.friedrich.engine_omega.actor;
 
 import rocks.friedrich.engine_omega.internal.annotations.API;
 
-public final class PrismaticJoint extends Joint<org.jbox2d.dynamics.joints.PrismaticJoint> {
-    private float lowerLimit;
-    private float upperLimit;
+public final class PrismaticJoint
+        extends Joint<org.jbox2d.dynamics.joints.PrismaticJoint>
+{
+    private double lowerLimit;
+
+    private double upperLimit;
 
     private boolean motorEnabled;
+
     private boolean limitEnabled;
 
     /**
      * Geschwindigkeit in m / s
      */
-    private float motorSpeed;
-    private float maximumMotorForce;
+    private double motorSpeed;
+
+    private double maximumMotorForce;
 
     @API
-    public void setMaximumMotorForce(float maximumMotorForce) {
+    public void setMaximumMotorForce(double maximumMotorForce)
+    {
         this.maximumMotorForce = maximumMotorForce;
         this.motorEnabled = true;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
-            joint.setMaxMotorForce(maximumMotorForce);
+        if (joint != null)
+        {
+            joint.setMaxMotorForce((float) maximumMotorForce);
             joint.enableMotor(true);
         }
     }
 
     @API
-    public float getMaximumMotorForce() {
+    public double getMaximumMotorForce()
+    {
         return maximumMotorForce;
     }
 
     @API
-    public float getLowerLimit() {
+    public double getLowerLimit()
+    {
         return lowerLimit;
     }
 
     @API
-    public void setLowerLimit(float lowerLimit) {
+    public void setLowerLimit(double lowerLimit)
+    {
         this.lowerLimit = lowerLimit;
         this.limitEnabled = true;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
-            joint.setLimits(lowerLimit, upperLimit);
+        if (joint != null)
+        {
+            joint.setLimits((float) lowerLimit, (float) upperLimit);
             joint.enableLimit(true);
         }
     }
 
     @API
-    public float getUpperLimit() {
+    public double getUpperLimit()
+    {
         return upperLimit;
     }
 
     @API
-    public void setUpperLimit(float upperLimit) {
+    public void setUpperLimit(double upperLimit)
+    {
         this.upperLimit = upperLimit;
         this.limitEnabled = true;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
-            joint.setLimits(lowerLimit, upperLimit);
+        if (joint != null)
+        {
+            joint.setLimits((float) lowerLimit, (float) upperLimit);
             joint.enableLimit(true);
         }
     }
 
     @API
-    public float getMotorSpeed() {
+    public double getMotorSpeed()
+    {
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
+        if (joint != null)
+        {
             return joint.getMotorSpeed();
         }
-
         return motorSpeed;
     }
 
     @API
-    public void setMotorSpeed(float motorSpeed) {
+    public void setMotorSpeed(double motorSpeed)
+    {
         this.motorSpeed = motorSpeed;
         this.motorEnabled = true;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
-            joint.setMotorSpeed(motorSpeed);
+        if (joint != null)
+        {
+            joint.setMotorSpeed((float) motorSpeed);
             joint.enableMotor(true);
         }
     }
 
     @API
-    public boolean isMotorEnabled() {
+    public boolean isMotorEnabled()
+    {
         return motorEnabled;
     }
 
     @API
-    public void setMotorEnabled(boolean motorEnabled) {
+    public void setMotorEnabled(boolean motorEnabled)
+    {
         this.motorEnabled = motorEnabled;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
+        if (joint != null)
+        {
             joint.enableMotor(motorEnabled);
         }
     }
 
     @API
-    public boolean isLimitEnabled() {
+    public boolean isLimitEnabled()
+    {
         return limitEnabled;
     }
 
     @API
-    public void setLimitEnabled(boolean limitEnabled) {
+    public void setLimitEnabled(boolean limitEnabled)
+    {
         this.limitEnabled = limitEnabled;
-
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint != null) {
+        if (joint != null)
+        {
             joint.enableLimit(limitEnabled);
         }
     }
 
     @API
-    public void setLimits(float lower, float upper) {
+    public void setLimits(double lower, double upper)
+    {
         setLowerLimit(lower);
         setUpperLimit(upper);
     }
 
     @API
-    public float getTranslation() {
+    public double getTranslation()
+    {
         org.jbox2d.dynamics.joints.PrismaticJoint joint = getJoint();
-        if (joint == null) {
+        if (joint == null)
+        {
             return 0;
         }
-
         return joint.getJointTranslation();
     }
 
     @Override
-    protected void updateCustomProperties(org.jbox2d.dynamics.joints.PrismaticJoint joint) {
-        joint.setMotorSpeed(motorSpeed);
-        joint.setMaxMotorForce(maximumMotorForce);
-        joint.setLimits(lowerLimit,upperLimit);
+    protected void updateCustomProperties(
+            org.jbox2d.dynamics.joints.PrismaticJoint joint)
+    {
+        joint.setMotorSpeed((float) motorSpeed);
+        joint.setMaxMotorForce((float) maximumMotorForce);
+        joint.setLimits((float) lowerLimit, (float) upperLimit);
         joint.enableMotor(motorEnabled);
         joint.enableLimit(limitEnabled);
     }

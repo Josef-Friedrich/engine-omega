@@ -40,10 +40,10 @@ public final class FixtureBuilder {
      * @param width  Die Breite der rechteckigen Shape.
      * @param height Die Höhe der rechteckigen Shape.
      */
-    public static FixtureData createSimpleRectangularFixture(float width, float height) {
+    public static FixtureData createSimpleRectangularFixture(double width, double height) {
         PolygonShape shape = new PolygonShape();
-        shape.set(new Vec2[] {new Vec2(0, 0), new Vec2(0, height), new Vec2(width, height), new Vec2(width, 0)}, 4);
-        shape.m_centroid.set(new Vec2(width / 2, height / 2));
+        shape.set(new Vec2[] {new Vec2(0, 0), new Vec2(0, (float) height), new Vec2((float) width, (float) height), new Vec2((float) width, 0)}, 4);
+        shape.m_centroid.set(new Vec2((float)  width / 2, (float) height / 2));
 
         return new FixtureData(shape);
     }
@@ -55,10 +55,10 @@ public final class FixtureBuilder {
      * @param my Der Mittelpunkt des Kreises, Y-Koordinate.
      * @param r  Der Radius des Kreises
      */
-    public static FixtureData createCircleShape(float mx, float my, float r) {
+    public static FixtureData createCircleShape(double mx, double my, double r) {
         CircleShape circleShape = new CircleShape();
-        circleShape.m_p.set(mx, my);
-        circleShape.setRadius(r);
+        circleShape.m_p.set((float) mx, (float) my);
+        circleShape.setRadius((float) r);
         return new FixtureData(circleShape);
     }
 
@@ -89,9 +89,9 @@ public final class FixtureBuilder {
      * @param width  Breite der rechteckigen Shape.
      * @param height Höhe der rechteckigen Shape.
      */
-    public static Shape createAxisParallelRectangularShape(float sx, float sy, float width, float height) {
+    public static Shape createAxisParallelRectangularShape(double sx, double sy, double width, double height) {
         PolygonShape rectShape = new PolygonShape();
-        rectShape.set(new Vec2[] {new Vec2(sx, sy), new Vec2(sx, sy + height), new Vec2(sx + width, sy + height), new Vec2(sx + width, sy)}, 4);
+        rectShape.set(new Vec2[] {new Vec2((float) sx, (float) sy), new Vec2((float) sx, (float) (sy + height)), new Vec2((float) (sx + width), (float) (sy + height)), new Vec2((float) (sx + width), (float) sy)}, 4);
         return rectShape;
     }
 
@@ -130,10 +130,10 @@ public final class FixtureBuilder {
                 if (split.length != 4) {
                     throw new IllegalArgumentException("Fehlerhafte Eingabe");
                 }
-                float sx = Float.parseFloat(split[0]);
-                float sy = Float.parseFloat(split[1]);
-                float width = Float.parseFloat(split[2]);
-                float height = Float.parseFloat(split[3]);
+                double sx = Double.parseDouble(split[0]);
+                double sy = Double.parseDouble(split[1]);
+                double width = Double.parseDouble(split[2]);
+                double height = Double.parseDouble(split[3]);
                 return createAxisParallelRectangularShape(sx, sy, width, height);
             case 'P':
                 if (split.length % 2 != 0) {
@@ -141,9 +141,9 @@ public final class FixtureBuilder {
                 }
                 Vec2[] polyPoints = new Vec2[split.length / 2];
                 for (int i = 0; i < polyPoints.length; i++) {
-                    float px = Float.parseFloat(split[2 * i]);
-                    float py = Float.parseFloat(split[2 * i + 1]);
-                    polyPoints[i] = new Vec2(px, py);
+                    double px = Double.parseDouble(split[2 * i]);
+                    double py = Double.parseDouble(split[2 * i + 1]);
+                    polyPoints[i] = new Vec2((float) px, (float) py);
                 }
                 PolygonShape polygonShape = new PolygonShape();
                 polygonShape.set(polyPoints, polyPoints.length);
@@ -153,8 +153,8 @@ public final class FixtureBuilder {
                     throw new IllegalArgumentException("Fehlerhafte Eingabe");
                 }
                 CircleShape circleShape = new CircleShape();
-                circleShape.m_p.set(Float.parseFloat(split[0]), Float.parseFloat(split[1]));
-                circleShape.setRadius(Float.parseFloat(split[2]));
+                circleShape.m_p.set((float) Double.parseDouble(split[0]), (float) Double.parseDouble(split[1]));
+                circleShape.setRadius((float) Double.parseDouble(split[2]));
                 return circleShape;
             default:
                 throw new IllegalArgumentException("Fehlerhafte Eingabe!");

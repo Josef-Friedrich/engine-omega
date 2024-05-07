@@ -30,8 +30,8 @@ public class ValueAnimator<Value> implements FrameUpdateListener {
     private final Consumer<Value> consumer;
     private final Interpolator<Value> interpolator;
     private final AnimationMode mode;
-    private float currentTime = 0;
-    private final float duration;
+    private double currentTime = 0;
+    private final double duration;
     private boolean complete = false;
     private boolean paused = false;
 
@@ -42,7 +42,7 @@ public class ValueAnimator<Value> implements FrameUpdateListener {
 
     private EventListeners<Consumer<Value>> completionListeners = new EventListeners<>();
 
-    public ValueAnimator(float duration, Consumer<Value> consumer, Interpolator<Value> interpolator, AnimationMode mode, FrameUpdateListenerContainer parent) {
+    public ValueAnimator(double duration, Consumer<Value> consumer, Interpolator<Value> interpolator, AnimationMode mode, FrameUpdateListenerContainer parent) {
         this.duration = duration;
         this.consumer = consumer;
         this.interpolator = interpolator;
@@ -78,7 +78,7 @@ public class ValueAnimator<Value> implements FrameUpdateListener {
         return paused;
     }
 
-    public ValueAnimator(float duration, Consumer<Value> consumer, Interpolator<Value> interpolator, FrameUpdateListenerContainer parent) {
+    public ValueAnimator(double duration, Consumer<Value> consumer, Interpolator<Value> interpolator, FrameUpdateListenerContainer parent) {
         this(duration, consumer, interpolator, AnimationMode.SINGLE, parent);
     }
 
@@ -90,7 +90,7 @@ public class ValueAnimator<Value> implements FrameUpdateListener {
      *                 sind nicht erlaubt.
      */
     @API
-    public void setProgress(float progress) {
+    public void setProgress(double progress) {
         if (progress < 0 || progress > 1) {
             throw new IllegalArgumentException("Der eingegebene Progess muss zwischen 0 und 1 liegen. War " + progress);
         }
@@ -101,11 +101,11 @@ public class ValueAnimator<Value> implements FrameUpdateListener {
     }
 
     @Override
-    public void onFrameUpdate(float deltaSeconds) {
+    public void onFrameUpdate(double deltaSeconds) {
         if (paused) {
             return;
         }
-        float progress;
+        double progress;
 
         if (!goingBackwards) {
             this.currentTime += deltaSeconds;

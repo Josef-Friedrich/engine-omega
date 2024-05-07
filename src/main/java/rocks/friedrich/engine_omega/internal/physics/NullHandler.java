@@ -76,22 +76,22 @@ public class NullHandler implements PhysicsHandler {
     }
 
     @Override
-    public float getRotation() {
+    public double getRotation() {
         return this.physicsData.getRotation();
     }
 
     @Override
-    public void rotateBy(float degree) {
+    public void rotateBy(double degree) {
         this.physicsData.setRotation(this.physicsData.getRotation() + degree);
     }
 
     @Override
-    public void setRotation(float degree) {
+    public void setRotation(double degree) {
         this.physicsData.setRotation(degree);
     }
 
     @Override
-    public void setDensity(float density) {
+    public void setDensity(double density) {
         if (density <= 0) {
             throw new IllegalArgumentException("Dichte kann nicht kleiner als 0 sein. Eingabe war " + density + ".");
         }
@@ -99,63 +99,63 @@ public class NullHandler implements PhysicsHandler {
     }
 
     @Override
-    public float getDensity() {
+    public double getDensity() {
         return this.physicsData.getGlobalDensity();
     }
 
     @Override
-    public void setGravityScale(float factor) {
+    public void setGravityScale(double factor) {
         this.physicsData.setGravityScale(factor);
     }
 
     @Override
-    public float getGravityScale() {
+    public double getGravityScale() {
         return this.physicsData.getGravityScale();
     }
 
     @Override
-    public void setFriction(float friction) {
+    public void setFriction(double friction) {
         this.physicsData.setGlobalFriction(friction);
     }
 
     @Override
-    public float getFriction() {
+    public double getFriction() {
         return this.physicsData.getGlobalFriction();
     }
 
     @Override
-    public void setRestitution(float elasticity) {
+    public void setRestitution(double elasticity) {
         this.physicsData.setGlobalRestitution(elasticity);
     }
 
     @Override
-    public float getRestitution() {
+    public double getRestitution() {
         return this.physicsData.getGlobalRestitution();
     }
 
     @Override
-    public void setLinearDamping(float damping) {
+    public void setLinearDamping(double damping) {
         this.physicsData.setLinearDamping(damping);
     }
 
     @Override
-    public float getLinearDamping() {
+    public double getLinearDamping() {
         return physicsData.getLinearDamping();
     }
 
     @Override
-    public void setAngularDamping(float damping) {
+    public void setAngularDamping(double damping) {
         physicsData.setAngularDamping(damping);
     }
 
     @Override
-    public float getAngularDamping() {
+    public double getAngularDamping() {
         return physicsData.getAngularDamping();
     }
 
     @Override
-    public float getMass() {
-        Float mass = physicsData.getMass();
+    public double getMass() {
+        Double mass = physicsData.getMass();
         return mass == null ? 0 : mass;
     }
 
@@ -165,12 +165,12 @@ public class NullHandler implements PhysicsHandler {
     }
 
     @Override
-    public void applyTorque(float torque) {
+    public void applyTorque(double torque) {
         mountCallbacks.add(physicsHandler -> physicsHandler.applyTorque(torque));
     }
 
     @Override
-    public void applyRotationImpulse(float rotationImpulse) {
+    public void applyRotationImpulse(double rotationImpulse) {
         mountCallbacks.add(physicsHandler -> physicsHandler.applyRotationImpulse(rotationImpulse));
     }
 
@@ -221,12 +221,12 @@ public class NullHandler implements PhysicsHandler {
     }
 
     @Override
-    public void setAngularVelocity(float rotationsPerSecond) {
-        physicsData.setAngularVelocity((float) Math.toRadians(rotationsPerSecond * 360));
+    public void setAngularVelocity(double rotationsPerSecond) {
+        physicsData.setAngularVelocity((double) Math.toRadians(rotationsPerSecond * 360));
     }
 
     @Override
-    public float getAngularVelocity() {
+    public double getAngularVelocity() {
         return physicsData.getAngularVelocity();
     }
 

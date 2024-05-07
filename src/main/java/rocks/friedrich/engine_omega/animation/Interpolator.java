@@ -20,5 +20,5 @@
 package rocks.friedrich.engine_omega.animation;
 
 public interface Interpolator<V> {
-    V interpolate(float progress);
+    V interpolate(double progress);
 }

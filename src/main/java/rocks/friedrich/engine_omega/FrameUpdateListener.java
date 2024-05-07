@@ -13,5 +13,5 @@ public interface FrameUpdateListener {
      * @param deltaSeconds Die Zeit <b>in Sekunden</b>, die seit dem letzten Update vergangen
      */
     @API
-    void onFrameUpdate(float deltaSeconds);
+    void onFrameUpdate(double deltaSeconds);
 }

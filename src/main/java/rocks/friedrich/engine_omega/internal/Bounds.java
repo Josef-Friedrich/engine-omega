@@ -32,22 +32,22 @@ public final class Bounds {
     /**
      * <b>Reelle</b> <code>getX</code>-Position des Rechtecks
      */
-    private final float x;
+    private final double x;
 
     /**
      * <b>Reelle</b> <code>getY</code>-Position des Rechtecks
      */
-    private final float y;
+    private final double y;
 
     /**
      * <b>Reelle</b> Breite des Rechtecks
      */
-    private final float width;
+    private final double width;
 
     /**
      * <b>Reelle</b> Höhe des Rechtecks
      */
-    private final float height;
+    private final double height;
 
     /**
      * Konstruktor mit <b>reellen</b> Werten.
@@ -57,7 +57,7 @@ public final class Bounds {
      * @param width  Die Breite des Bounding-Rechtecks
      * @param height Die Höhe des Bounding-Rechtecks
      */
-    public Bounds(float x, float y, float width, float height) {
+    public Bounds(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -117,7 +117,7 @@ public final class Bounds {
      * @return Ein neues Bounds, dass die beiden Rechtecke genau umfasst.
      */
     public Bounds smallestCommon(Bounds bounds) {
-        float x, y, dX, dY;
+        double x, y, dX, dY;
 
         if (bounds.x < this.x) {
             x = bounds.x;
@@ -155,7 +155,7 @@ public final class Bounds {
      * @return Ein Bounds derselben Höhe und Breite wie dieses, das in jedem Fall über,
      * oder auf der Grenze liegt, wenn es passt, ist es <code>this</code>.
      */
-    public Bounds above(float lowerBound) {
+    public Bounds above(double lowerBound) {
         if (y + height < lowerBound) {
             return this;
         } else {
@@ -172,7 +172,7 @@ public final class Bounds {
      * @return Ein Bounds derselben Höhe und Breite wie dieses, das in jedem Fall below,
      * oder auf der Grenze liegt, wenn es passt, ist es <code>this</code>.
      */
-    public Bounds below(float upperBound) {
+    public Bounds below(double upperBound) {
         if (y > upperBound) {
             return this;
         } else {
@@ -190,7 +190,7 @@ public final class Bounds {
      * der Grenze liegt.<br> Wenn diese Eigenschaften bereits von diesem Objekt erfüllt werden, so
      * wird <code>this</code> zurückgegeben.
      */
-    public Bounds rightOf(float border) {
+    public Bounds rightOf(double border) {
         if (x > border) {
             return this;
         } else {
@@ -208,7 +208,7 @@ public final class Bounds {
      * auf der Grenze liegt.<br> Wenn diese Eigenschaften bereits von diesem Objekt erfüllt
      * werden, so wird <code>this</code> zurückgegeben.
      */
-    public Bounds leftOf(float border) {
+    public Bounds leftOf(double border) {
         if (x + width < border) {
             return this;
         } else {
@@ -227,7 +227,7 @@ public final class Bounds {
      * @return Ein neues Bounds mit der eingegebenen Position und derselben Breite und
      * Höhe.
      */
-    public Bounds atPosition(float realX, float realY) {
+    public Bounds atPosition(double realX, double realY) {
         return new Bounds(realX, realY, width, height);
     }
 
@@ -292,7 +292,7 @@ public final class Bounds {
      * @return Das Ergebnis-Rectangle, das sich im äußeren Rectangle befinden wird.
      */
     public Bounds in(Bounds outer) {
-        float realX = this.x, realY = this.y;
+        double realX = this.x, realY = this.y;
 
         if (this.x < outer.x) {
             realX = outer.x;
@@ -344,7 +344,7 @@ public final class Bounds {
      * @see #getWidth()
      * @see #getHeight()
      */
-    public float getX() {
+    public double getX() {
         return x;
     }
 
@@ -357,7 +357,7 @@ public final class Bounds {
      * @see #getWidth()
      * @see #getHeight()
      */
-    public float getY() {
+    public double getY() {
         return y;
     }
 
@@ -370,7 +370,7 @@ public final class Bounds {
      * @see #getY()
      * @see #getHeight()
      */
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -383,7 +383,7 @@ public final class Bounds {
      * @see #getY()
      * @see #getWidth()
      */
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 

@@ -35,11 +35,11 @@ public class MouseWheelEvent {
     /**
      * Die Rotation des Mausrades. Bei Mäusen mit Präzession auch in Bruchteilen eines "Clicks"
      */
-    private final float wheelRotation;
+    private final double wheelRotation;
 
 
     @Internal
-    public MouseWheelEvent(float wheelRotation) {
+    public MouseWheelEvent(double wheelRotation) {
         this.wheelRotation = wheelRotation;
     }
 
@@ -64,8 +64,8 @@ public class MouseWheelEvent {
      * @see #getWheelRotation()
      */
     @API
-    public float getPreciseWheelRotation() {
-        return (float)wheelRotation;
+    public double getPreciseWheelRotation() {
+        return (double)wheelRotation;
     }
 
 }

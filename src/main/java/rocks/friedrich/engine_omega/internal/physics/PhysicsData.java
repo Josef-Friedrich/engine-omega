@@ -22,28 +22,28 @@ import java.util.function.Supplier;
 @Internal
 public class PhysicsData {
 
-    static final float DEFAULT_DENSITY = 10f;
-    static final float DEFAULT_FRICTION = 0f;
-    static final float DEFAULT_RESTITUTION = 0.5f;
+    static final double DEFAULT_DENSITY = 10f;
+    static final double DEFAULT_FRICTION = 0f;
+    static final double DEFAULT_RESTITUTION = 0.5f;
     static final BodyType DEFAULT_BODY_TYPE = BodyType.SENSOR;
 
     private boolean rotationLocked = false;
 
-    private float x = 0;
-    private float y = 0;
+    private double x = 0;
+    private double y = 0;
 
-    private float rotation = 0;
+    private double rotation = 0;
 
-    private float globalDensity = DEFAULT_DENSITY;
-    private float globalFriction = DEFAULT_FRICTION;
-    private float globalRestitution = DEFAULT_RESTITUTION;
-    private float torque = 0;
-    private float angularVelocity = 0;
-    private float gravityScale = 1;
-    private float linearDamping = 0;
-    private float angularDamping = 0;
+    private double globalDensity = DEFAULT_DENSITY;
+    private double globalFriction = DEFAULT_FRICTION;
+    private double globalRestitution = DEFAULT_RESTITUTION;
+    private double torque = 0;
+    private double angularVelocity = 0;
+    private double gravityScale = 1;
+    private double linearDamping = 0;
+    private double angularDamping = 0;
 
-    private Float mass;
+    private Double mass;
 
     private Vector velocity = Vector.NULL;
 
@@ -68,10 +68,10 @@ public class PhysicsData {
         data.setGravityScale(body.m_gravityScale);
         data.setX(body.getPosition().x);
         data.setY(body.getPosition().y);
-        data.setRotation((float) Math.toDegrees(body.getAngle()));
+        data.setRotation((double) Math.toDegrees(body.getAngle()));
         data.setTorque(body.m_torque);
         data.setVelocity(Vector.of(body.m_linearVelocity));
-        data.setAngularVelocity((float) Math.toDegrees(body.m_angularVelocity) / 360);
+        data.setAngularVelocity((double) Math.toDegrees(body.m_angularVelocity) / 360);
         data.setType(type);
 
         data.setAngularDamping(body.getAngularDamping());
@@ -120,15 +120,15 @@ public class PhysicsData {
         BodyDef bodyDef = new BodyDef();
 
         bodyDef.angle = (float) Math.toRadians(this.getRotation());
-        bodyDef.position.set(new Vec2(getX(), getY()));
+        bodyDef.position.set(new Vec2((float) getX(), (float) getY()));
         bodyDef.fixedRotation = isRotationLocked();
         bodyDef.linearVelocity = getVelocity().toVec2();
         bodyDef.angularVelocity = (float) Math.toRadians(getAngularVelocity() * 360);
         bodyDef.type = getType().toBox2D();
         bodyDef.active = true;
-        bodyDef.gravityScale = gravityScale;
-        bodyDef.angularDamping = angularDamping;
-        bodyDef.linearDamping = linearDamping;
+        bodyDef.gravityScale = (float) gravityScale;
+        bodyDef.angularDamping =  (float) angularDamping;
+        bodyDef.linearDamping =  (float) linearDamping;
 
         return bodyDef;
     }
@@ -157,11 +157,11 @@ public class PhysicsData {
         return data.toArray(new FixtureData[data.size()]);
     }
 
-    public void setMass(Float mass) {
+    public void setMass(Double mass) {
         this.mass = mass;
     }
 
-    public Float getMass() {
+    public Double getMass() {
         return mass;
     }
 
@@ -173,83 +173,83 @@ public class PhysicsData {
         this.rotationLocked = rotationLocked;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public float getRotation() {
+    public double getRotation() {
         return rotation;
     }
 
-    public void setRotation(float rotation) {
+    public void setRotation(double rotation) {
         this.rotation = rotation;
     }
 
-    public float getLinearDamping() {
+    public double getLinearDamping() {
         return linearDamping;
     }
 
-    public void setLinearDamping(float linearDamping) {
+    public void setLinearDamping(double linearDamping) {
         this.linearDamping = linearDamping;
     }
 
-    public float getAngularDamping() {
+    public double getAngularDamping() {
         return angularDamping;
     }
 
-    public void setAngularDamping(float angularDamping) {
+    public void setAngularDamping(double angularDamping) {
         this.angularDamping = angularDamping;
     }
 
-    public float getGlobalDensity() {
+    public double getGlobalDensity() {
         return globalDensity;
     }
 
-    public void setGlobalDensity(float globalDensity) {
+    public void setGlobalDensity(double globalDensity) {
         this.globalDensity = globalDensity;
     }
 
-    public float getGravityScale() {
+    public double getGravityScale() {
         return gravityScale;
     }
 
-    public void setGravityScale(float factor) {
+    public void setGravityScale(double factor) {
         this.gravityScale = factor;
     }
 
-    public float getGlobalFriction() {
+    public double getGlobalFriction() {
         return globalFriction;
     }
 
-    public void setGlobalFriction(float globalFriction) {
+    public void setGlobalFriction(double globalFriction) {
         this.globalFriction = globalFriction;
     }
 
-    public float getGlobalRestitution() {
+    public double getGlobalRestitution() {
         return globalRestitution;
     }
 
-    public void setGlobalRestitution(float globalRestitution) {
+    public void setGlobalRestitution(double globalRestitution) {
         this.globalRestitution = globalRestitution;
     }
 
-    public float getTorque() {
+    public double getTorque() {
         return torque;
     }
 
-    public void setTorque(float torque) {
+    public void setTorque(double torque) {
         this.torque = torque;
     }
 
@@ -277,11 +277,11 @@ public class PhysicsData {
         this.fixtures = fixtures;
     }
 
-    public float getAngularVelocity() {
+    public double getAngularVelocity() {
         return angularVelocity;
     }
 
-    public void setAngularVelocity(float angularVelocity) {
+    public void setAngularVelocity(double angularVelocity) {
         this.angularVelocity = angularVelocity;
     }
 }

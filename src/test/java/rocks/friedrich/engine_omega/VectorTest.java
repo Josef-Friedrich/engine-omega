@@ -112,13 +112,13 @@ public class VectorTest {
 
     @Test
     public void realX() {
-        float x = .013f;
+        double x = .013f;
         assertEquals(new Vector(x, 0).getX(), x, 0.00001f);
     }
 
     @Test
     public void realY() {
-        float y = .013f;
+        double y = .013f;
         assertEquals(new Vector(0, y).getY(), y, 0.00001f);
     }
 

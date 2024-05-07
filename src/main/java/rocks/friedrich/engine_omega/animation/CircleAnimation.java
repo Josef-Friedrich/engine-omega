@@ -1,9 +1,9 @@
 package rocks.friedrich.engine_omega.animation;
 
 import rocks.friedrich.engine_omega.actor.Actor;
-import rocks.friedrich.engine_omega.animation.interpolation.CosinusFloat;
-import rocks.friedrich.engine_omega.animation.interpolation.LinearFloat;
-import rocks.friedrich.engine_omega.animation.interpolation.SinusFloat;
+import rocks.friedrich.engine_omega.animation.interpolation.CosinusDouble;
+import rocks.friedrich.engine_omega.animation.interpolation.LinearDouble;
+import rocks.friedrich.engine_omega.animation.interpolation.SinusDouble;
 import rocks.friedrich.engine_omega.event.AggregateFrameUpdateListener;
 import rocks.friedrich.engine_omega.internal.annotations.API;
 import rocks.friedrich.engine_omega.Vector;
@@ -28,23 +28,23 @@ public class CircleAnimation extends AggregateFrameUpdateListener {
      *                          sich durch die Animation.
      */
     @API
-    public CircleAnimation(Actor actor, Vector rotationCenter, float durationInSeconds, boolean circleClockwise, boolean rotateActor) {
+    public CircleAnimation(Actor actor, Vector rotationCenter, double durationInSeconds, boolean circleClockwise, boolean rotateActor) {
         Vector currentActorCenter = actor.getCenter();
-        float radius = new Vector(rotationCenter, currentActorCenter).getLength();
+        double radius = new Vector(rotationCenter, currentActorCenter).getLength();
         Vector rightPoint = rotationCenter.add(new Vector(radius, 0));
 
-        ValueAnimator<Float> aX = new ValueAnimator<>(durationInSeconds, x -> actor.setCenter(x, actor.getCenter().getY()), new CosinusFloat(rightPoint.getX(), radius), AnimationMode.REPEATED, this);
-        ValueAnimator<Float> aY = new ValueAnimator<>(durationInSeconds, y -> actor.setCenter(actor.getCenter().getX(), y), new SinusFloat(rotationCenter.getY(), circleClockwise ? -radius : radius), AnimationMode.REPEATED, this);
+        ValueAnimator<Double> aX = new ValueAnimator<>(durationInSeconds, x -> actor.setCenter(x, actor.getCenter().getY()), new CosinusDouble(rightPoint.getX(), radius), AnimationMode.REPEATED, this);
+        ValueAnimator<Double> aY = new ValueAnimator<>(durationInSeconds, y -> actor.setCenter(actor.getCenter().getX(), y), new SinusDouble(rotationCenter.getY(), circleClockwise ? -radius : radius), AnimationMode.REPEATED, this);
 
         // Winkel zwischen gewünschtem Startpunkt und aktueller Actor-Position (immer in [0;PI])
-        float angle = rotationCenter.negate().add(rightPoint).getAngle(rotationCenter.negate().add(currentActorCenter));
+        double angle = rotationCenter.negate().add(rightPoint).getAngle(rotationCenter.negate().add(currentActorCenter));
 
         if (circleClockwise && currentActorCenter.getY() > rotationCenter.getY() || !circleClockwise && currentActorCenter.getY() < rotationCenter.getY()) {
             // Gedrehter Winkel ist bereits über die Hälfte
             angle = 360 - angle;
         }
 
-        float actualProgress = angle / 360;
+        double actualProgress = angle / 360;
         aX.setProgress(actualProgress);
         aY.setProgress(actualProgress);
 
@@ -52,8 +52,8 @@ public class CircleAnimation extends AggregateFrameUpdateListener {
         addFrameUpdateListener(aY);
 
         if (rotateActor) {
-            float rotationAngle = circleClockwise ? angle : -angle;
-            ValueAnimator<Float> aR = new ValueAnimator<>(durationInSeconds, actor::setRotation, new LinearFloat(-rotationAngle, -rotationAngle + 360 * (circleClockwise ? -1 : 1)), AnimationMode.REPEATED, actor);
+            double rotationAngle = circleClockwise ? angle : -angle;
+            ValueAnimator<Double> aR = new ValueAnimator<>(durationInSeconds, actor::setRotation, new LinearDouble(-rotationAngle, -rotationAngle + 360 * (circleClockwise ? -1 : 1)), AnimationMode.REPEATED, actor);
             aR.setProgress(actualProgress);
             addFrameUpdateListener(aR);
         }

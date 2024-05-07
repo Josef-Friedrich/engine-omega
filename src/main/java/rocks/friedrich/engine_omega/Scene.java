@@ -97,7 +97,7 @@ public class Scene implements KeyListenerContainer, MouseClickListenerContainer,
      * @param deltaSeconds Die Echtzeit, die seit dem letzten World-Step vergangen ist.
      */
     @Internal
-    public final void step(float deltaSeconds, Function<Runnable, Future<?>> invoker) throws InterruptedException {
+    public final void step(double deltaSeconds, Function<Runnable, Future<?>> invoker) throws InterruptedException {
         synchronized (layers) {
             Collection<Future<?>> layerFutures = new ArrayList<>(layers.size());
 
@@ -212,13 +212,13 @@ public class Scene implements KeyListenerContainer, MouseClickListenerContainer,
     }
 
     @Internal
-    private static void renderJointRectangle(Graphics2D g, Color color, Vector a, Vector b, float pixelPerMeter) {
+    private static void renderJointRectangle(Graphics2D g, Color color, Vector a, Vector b, double pixelPerMeter) {
         g.setColor(color);
         g.drawRect((int) a.getX() - (JOINT_CIRCLE_RADIUS / 2), (int) a.getY() - (JOINT_CIRCLE_RADIUS / 2), JOINT_RECTANGLE_SIDE, JOINT_RECTANGLE_SIDE);
         g.drawRect((int) b.getX() - (JOINT_CIRCLE_RADIUS / 2), (int) b.getY() - (JOINT_CIRCLE_RADIUS / 2), JOINT_RECTANGLE_SIDE, JOINT_RECTANGLE_SIDE);
         g.drawLine((int) a.getX(), (int) a.getY(), (int) b.getX(), (int) b.getY());
         Vector middle = a.add(b).divide(2);
-        g.drawString(String.valueOf(a.getDistance(b).divide(pixelPerMeter).getLength()), middle.getX(), middle.getY());
+        g.drawString(String.valueOf(a.getDistance(b).divide(pixelPerMeter).getLength()), (int) middle.getX(), (int) middle.getY());
     }
 
     /**
@@ -304,7 +304,7 @@ public class Scene implements KeyListenerContainer, MouseClickListenerContainer,
     }
 
     @Internal
-    public final void invokeFrameUpdateListeners(float deltaSeconds) {
+    public final void invokeFrameUpdateListeners(double deltaSeconds) {
         frameUpdateListeners.invoke(frameUpdateListener -> frameUpdateListener.onFrameUpdate(deltaSeconds));
 
         synchronized (layers) {

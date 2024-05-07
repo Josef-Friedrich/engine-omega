@@ -36,17 +36,17 @@ public class Rectangle extends Geometry {
     /**
      * Die Breite
      */
-    private float width;
+    private double width;
 
     /**
      * Die Höhe
      */
-    private float height;
+    private double height;
 
     /**
      * Für abgerundete Ecken, Prozent der Abrundung der kleineren Seite
      */
-    private float borderRadius;
+    private double borderRadius;
 
     /**
      * Konstruktor.
@@ -54,11 +54,11 @@ public class Rectangle extends Geometry {
      * @param width  Die Breite des Rechtecks
      * @param height Die Höhe des Rechtecks
      */
-    public Rectangle(float width, float height) {
+    public Rectangle(double width, double height) {
         this(width, height, () -> FixtureBuilder.createSimpleRectangularFixture(width, height));
     }
 
-    public Rectangle(float width, float height, Supplier<FixtureData> shapeSupplier) {
+    public Rectangle(double width, double height, Supplier<FixtureData> shapeSupplier) {
         super(shapeSupplier);
 
         assertPositiveWidthAndHeight(width, height);
@@ -68,12 +68,12 @@ public class Rectangle extends Geometry {
     }
 
     @API
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
     @API
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -84,7 +84,7 @@ public class Rectangle extends Geometry {
      * @param height Neue Höhe für das Rechteck.
      */
     @API
-    public void setSize(float width, float height) {
+    public void setSize(double width, double height) {
         assertPositiveWidthAndHeight(width, height);
 
         this.width = width;
@@ -94,12 +94,12 @@ public class Rectangle extends Geometry {
     }
 
     @API
-    public float getBorderRadius() {
+    public double getBorderRadius() {
         return borderRadius;
     }
 
     @API
-    public void setBorderRadius(float percent) {
+    public void setBorderRadius(double percent) {
         if (percent < 0 || percent > 1) {
             throw new IllegalArgumentException("Borderradius kann nur zwischen 0 und 1 sein. War " + percent);
         }
@@ -111,7 +111,7 @@ public class Rectangle extends Geometry {
      * {@inheritDoc}
      */
     @Override
-    public void render(Graphics2D g, float pixelPerMeter) {
+    public void render(Graphics2D g, double pixelPerMeter) {
         g.setColor(getColor());
 
         if (borderRadius == 0) {

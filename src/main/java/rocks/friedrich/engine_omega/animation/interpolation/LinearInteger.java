@@ -35,7 +35,7 @@ public class LinearInteger implements Interpolator<Integer> {
 
     @Internal
     @Override
-    public Integer interpolate(float progress) {
+    public Integer interpolate(double progress) {
         return this.start + (int) ((this.end - this.start) * progress);
     }
 }

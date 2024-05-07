@@ -46,8 +46,8 @@ public class SnakeExample extends Scene
 
     public void placeRandomGoodie()
     {
-        float x = Random.range() * 10 - 5;
-        float y = Random.range() * 10 - 5;
+        double x = Random.range() * 10 - 5;
+        double y = Random.range() * 10 - 5;
         Goodie goodie = new Goodie();
         goodie.setCenter(x, y);
         add(goodie);
@@ -66,7 +66,7 @@ public class SnakeExample extends Scene
         }
 
         @Override
-        public void onFrameUpdate(float timeInS)
+        public void onFrameUpdate(double timeInS)
         {
             this.moveBy(v_per_s.multiply(timeInS));
         }

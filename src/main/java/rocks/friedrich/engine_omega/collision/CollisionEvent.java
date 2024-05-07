@@ -94,7 +94,7 @@ public class CollisionEvent<E extends Actor> {
     }
 
     /* @API
-    public float getTangentSpeed() {
+    public double getTangentSpeed() {
         return contact.getTangentSpeed(); // TODO Check how this works, currently returns always 0.0
     } */
 

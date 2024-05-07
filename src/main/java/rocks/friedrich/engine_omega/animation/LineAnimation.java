@@ -1,7 +1,7 @@
 package rocks.friedrich.engine_omega.animation;
 
 import rocks.friedrich.engine_omega.actor.Actor;
-import rocks.friedrich.engine_omega.animation.interpolation.LinearFloat;
+import rocks.friedrich.engine_omega.animation.interpolation.LinearDouble;
 import rocks.friedrich.engine_omega.event.AggregateFrameUpdateListener;
 import rocks.friedrich.engine_omega.Vector;
 
@@ -26,10 +26,10 @@ public class LineAnimation extends AggregateFrameUpdateListener {
      *                          Animation
      *                          endet nicht von sich aus.
      */
-    public LineAnimation(Actor actor, Vector endPoint, float durationInSeconds, boolean pingpong) {
+    public LineAnimation(Actor actor, Vector endPoint, double durationInSeconds, boolean pingpong) {
         Vector center = actor.getCenter();
 
-        addFrameUpdateListener(new ValueAnimator<>(durationInSeconds, x -> actor.setCenter(x, actor.getCenter().getY()), new LinearFloat(center.getX(), endPoint.getX()), pingpong ? AnimationMode.PINGPONG : AnimationMode.SINGLE, this));
-        addFrameUpdateListener(new ValueAnimator<>(durationInSeconds, y -> actor.setCenter(actor.getCenter().getX(), y), new LinearFloat(center.getY(), endPoint.getY()), pingpong ? AnimationMode.PINGPONG : AnimationMode.SINGLE, this));
+        addFrameUpdateListener(new ValueAnimator<>(durationInSeconds, x -> actor.setCenter(x, actor.getCenter().getY()), new LinearDouble(center.getX(), endPoint.getX()), pingpong ? AnimationMode.PINGPONG : AnimationMode.SINGLE, this));
+        addFrameUpdateListener(new ValueAnimator<>(durationInSeconds, y -> actor.setCenter(actor.getCenter().getX(), y), new LinearDouble(center.getY(), endPoint.getY()), pingpong ? AnimationMode.PINGPONG : AnimationMode.SINGLE, this));
     }
 }

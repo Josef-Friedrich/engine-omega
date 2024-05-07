@@ -216,11 +216,11 @@ public final class Game {
     public static Vector convertMousePosition(Scene scene, java.awt.Point mousePosition) {
         // Finde Klick auf Zeichenebene, die Position relativ zum Ursprung des RenderPanel-Canvas.
         // Mausklick-Position muss mit Zoom-Wert verrechnet werden
-        float zoom = scene.getCamera().getZoom();
-        float rotation = scene.getCamera().getRotation();
+        double zoom = scene.getCamera().getZoom();
+        double rotation = scene.getCamera().getRotation();
         Vector position = scene.getCamera().getPosition();
 
-        return new Vector(position.getX() + (((float) Math.cos(Math.toRadians(rotation)) * (mousePosition.x - width / 2f) + (float) Math.sin(Math.toRadians(rotation)) * (mousePosition.y - height / 2f))) / zoom, position.getY() + (((float) Math.sin(Math.toRadians(rotation)) * (mousePosition.x - width / 2f) - (float) Math.cos(Math.toRadians(rotation)) * (mousePosition.y - height / 2f))) / zoom);
+        return new Vector(position.getX() + (((double) Math.cos(Math.toRadians(rotation)) * (mousePosition.x - width / 2f) + (double) Math.sin(Math.toRadians(rotation)) * (mousePosition.y - height / 2f))) / zoom, position.getY() + (((double) Math.sin(Math.toRadians(rotation)) * (mousePosition.x - width / 2f) - (double) Math.cos(Math.toRadians(rotation)) * (mousePosition.y - height / 2f))) / zoom);
     }
 
     /**
@@ -230,7 +230,7 @@ public final class Game {
      * @param mouseWheelEvent das Event.
      */
     private static void enqueueMouseWheelEvent(java.awt.event.MouseWheelEvent mouseWheelEvent) {
-        MouseWheelEvent mouseWheelAction = new MouseWheelEvent((float) mouseWheelEvent.getPreciseWheelRotation());
+        MouseWheelEvent mouseWheelAction = new MouseWheelEvent((double) mouseWheelEvent.getPreciseWheelRotation());
         gameLogic.enqueue(() -> scene.invokeMouseWheelMoveListeners(mouseWheelAction));
     }
 

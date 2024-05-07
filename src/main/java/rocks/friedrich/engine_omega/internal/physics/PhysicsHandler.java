@@ -71,7 +71,7 @@ public interface PhysicsHandler {
      * @return die aktuelle Rotation des Ziel-Objekts in <i>Grad</i>.
      */
     @Internal
-    float getRotation();
+    double getRotation();
 
     /**
      * Rotiert das Ziel-Objekt um einen festen Winkel.
@@ -83,46 +83,46 @@ public interface PhysicsHandler {
      *               </ul>
      */
     @Internal
-    void rotateBy(float degree);
+    void rotateBy(double degree);
 
     @Internal
-    void setRotation(float degree);
+    void setRotation(double degree);
 
     @Internal
-    void setDensity(float density);
+    void setDensity(double density);
 
     @Internal
-    float getDensity();
+    double getDensity();
 
     @Internal
-    void setGravityScale(float factor);
+    void setGravityScale(double factor);
 
     @Internal
-    float getGravityScale();
+    double getGravityScale();
 
     @Internal
-    void setFriction(float friction);
+    void setFriction(double friction);
 
     @Internal
-    float getFriction();
+    double getFriction();
 
     @Internal
-    void setRestitution(float elasticity);
+    void setRestitution(double elasticity);
 
     @Internal
-    float getRestitution();
+    double getRestitution();
 
     @Internal
-    void setLinearDamping(float damping);
+    void setLinearDamping(double damping);
 
     @Internal
-    float getLinearDamping();
+    double getLinearDamping();
 
     @Internal
-    void setAngularDamping(float damping);
+    void setAngularDamping(double damping);
 
     @Internal
-    float getAngularDamping();
+    double getAngularDamping();
 
     /**
      * Gibt die Masse des Ziel-Objekts aus.
@@ -130,7 +130,7 @@ public interface PhysicsHandler {
      * @return Die Masse des Ziel-Objekts in [kg].
      */
     @Internal
-    float getMass();
+    double getMass();
 
     /**
      * Übt eine Kraft auf das Ziel-Objekt (im Massenschwerpunkt) aus (sofern möglich).
@@ -147,7 +147,7 @@ public interface PhysicsHandler {
      * @param torque der Drehmoment, der auf das Ziel-Objekt wirken soll. In [N*m]
      */
     @Internal
-    void applyTorque(float torque);
+    void applyTorque(double torque);
 
     /**
      * Wirkt einen Drehimpuls auf das Ziel-Objekt.
@@ -155,7 +155,7 @@ public interface PhysicsHandler {
      * @param rotationImpulse der Drehimpuls, der auf das Ziel-Objekt wirken soll. in [kg*m*m/s]
      */
     @Internal
-    void applyRotationImpulse(float rotationImpulse);
+    void applyRotationImpulse(double rotationImpulse);
 
     /**
      * Macht ein Type-Update für diesen Handler.
@@ -226,7 +226,7 @@ public interface PhysicsHandler {
      * @param rotationsPerSecond Setzt die Drehgeschwindigkeit, mit der sich das Zielobjekt bewegen soll.
      */
     @Internal
-    void setAngularVelocity(float rotationsPerSecond);
+    void setAngularVelocity(double rotationsPerSecond);
 
     /**
      * Gibt die aktuelle Drehgeschwindigkeit aus.
@@ -234,7 +234,7 @@ public interface PhysicsHandler {
      * @return Die aktuelle Drehgeschwindigkeit.
      */
     @Internal
-    float getAngularVelocity();
+    double getAngularVelocity();
 
     /**
      * Setzt, ob die Rotation blockiert sein soll.

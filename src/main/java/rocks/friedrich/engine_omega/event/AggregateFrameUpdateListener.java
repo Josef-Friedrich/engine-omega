@@ -44,7 +44,7 @@ public abstract class AggregateFrameUpdateListener implements FrameUpdateListene
     }
 
     @Override
-    public void onFrameUpdate(float deltaSeconds) {
+    public void onFrameUpdate(double deltaSeconds) {
         if (!paused) {
             listeners.invoke(listener -> listener.onFrameUpdate(deltaSeconds));
         }

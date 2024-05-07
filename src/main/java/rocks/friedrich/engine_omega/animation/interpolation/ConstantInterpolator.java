@@ -25,7 +25,7 @@ public class ConstantInterpolator<Value> implements Interpolator<Value> {
 
     @Internal
     @Override
-    public Value interpolate(float progress) {
+    public Value interpolate(double progress) {
         return value;
     }
 }

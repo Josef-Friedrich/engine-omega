@@ -23,19 +23,19 @@ import rocks.friedrich.engine_omega.animation.Interpolator;
 import rocks.friedrich.engine_omega.internal.annotations.API;
 import rocks.friedrich.engine_omega.internal.annotations.Internal;
 
-public class LinearFloat implements Interpolator<Float> {
-    private final float start;
-    private final float end;
+public class ReverseEaseDouble implements Interpolator<Double> {
+    private final double startAndEnd;
+    private final double middle;
 
     @API
-    public LinearFloat(float start, float end) {
-        this.start = start;
-        this.end = end;
+    public ReverseEaseDouble(double startAndEnd, double middle) {
+        this.startAndEnd = startAndEnd;
+        this.middle = middle;
     }
 
     @Internal
     @Override
-    public Float interpolate(float progress) {
-        return this.start + (this.end - this.start) * progress;
+    public Double interpolate(double progress) {
+        return this.startAndEnd + (double) Math.sin(progress * Math.PI) * (this.middle - this.startAndEnd);
     }
 }

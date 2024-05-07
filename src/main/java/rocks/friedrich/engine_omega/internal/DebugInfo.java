@@ -20,15 +20,15 @@
 package rocks.friedrich.engine_omega.internal;
 
 public final class DebugInfo {
-    private final float frameDuration;
+    private final double frameDuration;
     private final int bodyCount;
 
-    public DebugInfo(float frameDuration, int bodyCount) {
+    public DebugInfo(double frameDuration, int bodyCount) {
         this.frameDuration = frameDuration;
         this.bodyCount = bodyCount;
     }
 
-    public float getFrameDuration() {
+    public double getFrameDuration() {
         return frameDuration;
     }
 

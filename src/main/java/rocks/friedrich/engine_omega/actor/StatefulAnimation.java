@@ -39,18 +39,18 @@ public class StatefulAnimation<State> extends Actor {
     private State currentState = null;
     private AnimationFrame[] currentAnimation = null;
 
-    private float currentTime = 0;
+    private double currentTime = 0;
     private int currentIndex = 0;
 
-    private float width;
-    private float height;
+    private double width;
+    private double height;
 
     private boolean flipHorizontal = false;
     private boolean flipVertical = false;
 
     private boolean animationPaused = false;
 
-    public StatefulAnimation(float width, float height) {
+    public StatefulAnimation(double width, double height) {
         super(() -> FixtureBuilder.createSimpleRectangularFixture(width, height));
 
         this.width = width;
@@ -60,12 +60,12 @@ public class StatefulAnimation<State> extends Actor {
     }
 
     @API
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
     @API
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -261,7 +261,7 @@ public class StatefulAnimation<State> extends Actor {
      *                      States verweilen soll, bis der Frame gewechselt wird.
      */
     @API
-    public void setFrameDuration(State state, float frameDuration) {
+    public void setFrameDuration(State state, double frameDuration) {
         if (!states.containsKey(state)) {
             throw new RuntimeException("Der Zustand ist nicht bekannt: " + state);
         }
@@ -275,7 +275,7 @@ public class StatefulAnimation<State> extends Actor {
      * Methode wird frameweise über einen anonymen Listener aufgerufen.
      */
     @Internal
-    private void internalOnFrameUpdate(float frameDuration) {
+    private void internalOnFrameUpdate(double frameDuration) {
         if (currentAnimation == null || currentAnimation.length == 0 || animationPaused) {
             return; // we don't have a state yet - or the animation is paused
         }
@@ -310,7 +310,7 @@ public class StatefulAnimation<State> extends Actor {
      * @param height Neue Höhe für das Rechteck.
      */
     @API
-    public void setSize(float width, float height) {
+    public void setSize(double width, double height) {
         assertPositiveWidthAndHeight(width, height);
 
         this.width = width;
@@ -321,7 +321,7 @@ public class StatefulAnimation<State> extends Actor {
 
     @Internal
     @Override
-    public void render(Graphics2D g, float pixelPerMeter) {
+    public void render(Graphics2D g, double pixelPerMeter) {
         if (currentAnimation == null || currentAnimation.length == 0) {
             return; // we don't have a state yet
         }

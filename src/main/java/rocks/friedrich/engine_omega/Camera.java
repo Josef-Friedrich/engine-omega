@@ -55,7 +55,7 @@ import java.awt.Point;
  * @author Michael Andonie
  */
 public final class Camera {
-    public static final float DEFAULT_ZOOM = 30;
+    public static final double DEFAULT_ZOOM = 30;
 
     /**
      * Aktuelle Position des Mittelpunkts der Kamera.
@@ -80,12 +80,12 @@ public final class Camera {
     /**
      * Der aktuelle Kamerazoom.
      */
-    private float zoom = DEFAULT_ZOOM;
+    private double zoom = DEFAULT_ZOOM;
 
     /**
      * Die aktuelle Drehung in Grad.
      */
-    private float rotation = 0;
+    private double rotation = 0;
 
     /**
      * Konstruktor erstellt eine neue Kamera mit Fokus auf <code>(0, 0)</code>.
@@ -182,7 +182,7 @@ public final class Camera {
      *             und 0 (jeweils exklusiv) "zoomen raus".
      */
     @API
-    public void setZoom(float zoom) {
+    public void setZoom(double zoom) {
         if (zoom <= 0) {
             throw new IllegalArgumentException("Der Kamerazoom kann nicht kleiner oder gleich 0 sein.");
         }
@@ -196,7 +196,7 @@ public final class Camera {
      * @return Der aktuelle Zoom der Kamera.
      */
     @API
-    public float getZoom() {
+    public double getZoom() {
         return zoom;
     }
 
@@ -208,7 +208,7 @@ public final class Camera {
      * @param y Die Verschiebung in <code>getY</code>-Richtung.
      */
     @API
-    public void moveBy(float x, float y) {
+    public void moveBy(double x, double y) {
         this.moveBy(new Vector(x, y));
     }
 
@@ -235,12 +235,12 @@ public final class Camera {
     }
 
     @API
-    public void rotateBy(float degree) {
+    public void rotateBy(double degree) {
         this.rotation += degree;
     }
 
     @API
-    public void rotateTo(float degree) {
+    public void rotateTo(double degree) {
         this.rotation = degree;
     }
 
@@ -261,7 +261,7 @@ public final class Camera {
      * @param y Neue Y-Koordinate des Kamerazentrums
      */
     @API
-    public void setPostion(float x, float y) {
+    public void setPostion(double x, double y) {
         this.setPosition(new Vector(x, y));
     }
 
@@ -286,7 +286,7 @@ public final class Camera {
      * @hidden
      */
     @Internal
-    public Point toScreenPixelLocation(Vector locationInWorld, float pixelPerMeter) {
+    public Point toScreenPixelLocation(Vector locationInWorld, double pixelPerMeter) {
         Vector cameraRelativeLocInPx = position.multiply(pixelPerMeter);
 
         Vector frameSize = Game.getFrameSizeInPixels();
@@ -303,7 +303,7 @@ public final class Camera {
         this.position = moveIntoBounds(this.position);
     }
 
-    public float getRotation() {
+    public double getRotation() {
         return rotation;
     }
 
@@ -312,8 +312,8 @@ public final class Camera {
             return position;
         }
 
-        float x = Math.max(this.bounds.getX(), Math.min(position.getX(), this.bounds.getX() + this.bounds.getWidth()));
-        float y = Math.max(this.bounds.getY(), Math.min(position.getY(), this.bounds.getY() + this.bounds.getHeight()));
+        double x = Math.max(this.bounds.getX(), Math.min(position.getX(), this.bounds.getX() + this.bounds.getWidth()));
+        double y = Math.max(this.bounds.getY(), Math.min(position.getY(), this.bounds.getY() + this.bounds.getHeight()));
 
         return new Vector(x, y);
     }

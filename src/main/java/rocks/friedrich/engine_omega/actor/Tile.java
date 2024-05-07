@@ -31,5 +31,5 @@ import java.awt.Graphics2D;
 @API
 public interface Tile {
     @Internal
-    void render(Graphics2D g, float width, float height);
+    void render(Graphics2D g, double width, double height);
 }
