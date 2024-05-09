@@ -82,14 +82,14 @@ public final class PeriodicTask implements FrameUpdateListener {
     }
 
     /**
-     * @param deltaSeconds Die Zeit in Millisekunden, die seit dem letzten Update vergangen
+     * @param deltaSeconds Die Zeit in Sekunden, die seit dem letzten Update vergangen sind.
      */
     @Override
     @Internal
     public void onFrameUpdate(float deltaSeconds) {
         countdown -= deltaSeconds;
 
-        while (this.countdown < 0) {
+        if (countdown < 0) {
             countdown += interval;
             runnable.run();
         }
