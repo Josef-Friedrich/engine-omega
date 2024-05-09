@@ -164,12 +164,12 @@ public final class Bounds {
     }
 
     /**
-     * Berechnet, ob dieses Rectangle below einer Grenze liegt, und wenn <b>nicht</b>, dann berechnet
+     * Berechnet, ob dieses Rectangle unter einer Grenze liegt, und wenn <b>nicht</b>, dann berechnet
      * es eines, das gerade so an der Obergrenze liegt.
      *
      * @param upperBound Die Grenze, auf der das Ergebnis maximal liegen darf.
      *
-     * @return Ein Bounds derselben Höhe und Breite wie dieses, das in jedem Fall below,
+     * @return Ein Bounds derselben Höhe und Breite wie dieses, das in jedem Fall unter,
      * oder auf der Grenze liegt, wenn es passt, ist es <code>this</code>.
      */
     public Bounds below(float upperBound) {

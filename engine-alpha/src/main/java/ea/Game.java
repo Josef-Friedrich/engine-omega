@@ -61,7 +61,7 @@ public final class Game {
 
     /**
      * Wird <code>verbose</code> auf <code>true</code> gesetzt, so werden äußerst ausführliche Log-Ausgaben gemacht.
-     * Dies betrifft below anderem Informationen über das Verhalten der frameweise arbeitenden Threads. Hierfür wurde
+     * Dies betrifft unter anderem Informationen über das Verhalten der frameweise arbeitenden Threads. Hierfür wurde
      * diese Variable eingeführt.
      */
     private static boolean verbose;
