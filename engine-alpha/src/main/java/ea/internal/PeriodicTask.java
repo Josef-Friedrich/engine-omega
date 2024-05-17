@@ -89,7 +89,7 @@ public final class PeriodicTask implements FrameUpdateListener {
     public void onFrameUpdate(float deltaSeconds) {
         countdown -= deltaSeconds;
 
-        if (countdown < 0) {
+        while (countdown < 0) {
             countdown += interval;
             runnable.run();
         }
